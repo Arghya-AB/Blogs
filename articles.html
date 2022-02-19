@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arghya's Blogs</title>
+    <link rel="stylesheet" href="styles/pico.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <style>
+        .float{
+            position:fixed;
+            padding-top: 2px;
+            padding-left: 0.05%;
+            width:60px;
+            height:60px;
+            bottom:80px;
+            right:1%;
+            background-color:#0C9;
+            border-radius:50px;
+            text-align:center;
+            box-shadow: 2px 2px 3px 1px rgba(0, 4, 7, 0.61);
+            font-size: 190%;
+            text-decoration: none;
+            color: white;
+        }
+        .my-float{
+            margin-top:22px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .float {
+                background-color: rgb(0, 0, 0);
+            }
+        }
+
+        @media only screen and (max-width: 1200px) {
+        .float {
+                padding-top: 5px;
+                bottom:90px;
+            }
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="../highlight/an-old-hope.min.css">
+    <script src="../highlight/highlight.min.js"></script> -->
+</head>
+<body>
+    <nav class="topnav container-fluid">
+        <ul>
+            <li><a href="index.html">About 😎</a></li>
+            <li><a href="articles.html">Articles 📄</a></li>
+            <li><a href="contact.html">Contact Me 🌏</a></li>
+        </ul>
+        <ul>
+            <li><h5>Arghya's Blog 💫</h5></li>
+        </ul>
+      </nav>
+
+    <main class="container">
+        <h2 style="text-align: center;">My articles!</h2>
+
+        <article>
+            <header style="text-align: left;">Index</header>
+            <aside>
+                <nav>
+                    <ol>
+                        <li><a href="#a1">Value Unpacking In Python</a></li>
+                        <li><a href="#a2">Value Packing In Python And The * Operator</a></li>
+                        <!-- Updation reqired -->
+                    </ol>
+                </nav>
+            </aside>
+        </article>
+
+        <article id="a1">
+            <header>Value Unpacking In Python</header>
+            This article covers multiple assignment/value unpacking in python. It's a very useful feature which helps
+            make codebases concise and clearer. We explore value unpacking in python and even implement a custom class which
+            supports it!
+            <footer>
+                <nav>
+                    <a href="articles/value_unpacking.html">Read about it here ➡️</a>
+                    <small>Date: 10th Feburary 2022</small>
+                </nav>
+            </footer>
+        </article>
+
+        <article id="a2">
+            <header>Value Packing In Python And The * Operator</header>
+            A continutation of the previous article where we explore another feature of python known as value
+            packing. This is closely related to unpacking except that it allows the programmer to pack multiple
+            values into a single variable (often a list or tuple). This will also cover the * operator in python 
+            and it's uses!
+            <footer>
+                <nav>
+                    <a href="articles/value_packing.html">Read about it here ➡️</a>
+                    <small>Date: 14th Feburary 2022</small>
+                </nav>
+            </footer>
+        </article>
+        <!-- Updation reqired -->
+    </main>
+
+    <a href="#" class="float" id="float">↑</a>
+
+    <nav class="container-fluid footer">
+        <ul><li><small>This is the blog of Arghya 👋</small></li></ul>
+        <ul style="text-align: right;"><li><small>A developer and student who loves computer and tech ❣️</small></li></ul>
+    </nav>
+</body>
+</html>

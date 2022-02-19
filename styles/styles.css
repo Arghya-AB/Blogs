@@ -1,0 +1,58 @@
+html {
+  scroll-behavior: smooth;
+}
+body::-webkit-scrollbar {
+  width: 7px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 2px;
+}
+@media only screen and (max-width: 1200px) {
+  body {
+    padding-top: 80px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  body {
+    padding-top: 30px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .footer {
+    background: rgb(0, 0, 30);
+  }
+}
+@media (prefers-color-scheme: light) {
+  .footer {
+    background: rgb(184, 238, 235);
+    color: rgb(0, 0, 0);
+  }
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.topnav {
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  backdrop-filter: blur(30px);
+  box-shadow: 1px 8px 8px -7px rgba(0, 4, 7, 0.61);
+}
+small {
+  font-size: 15px;
+}
+
+.footer {
+  box-shadow: 8px 8px 8px -7px rgba(0, -10, 10, 0.61);
+  bottom: 0;
+}
+header {
+  font-weight: bolder;
+  text-align: center;
+}

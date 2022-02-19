@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arghya's Blogs</title>
+    <link rel="stylesheet" href="../styles/pico.min.css">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../highlight/an-old-hope.min.css">
+    <script src="../highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+    <nav class="topnav container-fluid">
+        <ul>
+            <li><a href="../index.html">About 😎</a></li>
+            <li><a href="../articles.html">Articles 📄</a></li>
+            <li><a href="../contact.html">Contact Me 🌏</a></li>
+        </ul>
+        <ul>
+            <li><h5>Arghya's Blog 💫</h5></li>
+        </ul>
+      </nav>
+
+    <main class="container">
+        <h2 style="text-align: center;">Value Packing In Python And The * Operator</h2>
+        <p style="text-align: right;">14th Feburary 2022</p>
+        <article>
+            <header>Introduction</header>
+            <p>
+                This article is a continutation of my previous article <a href= "value_unpacking.html">here</a> where
+                we explore another closely related concept, <u><b>value unpacking</b></u> in python. Python's vast world of syntax includes
+                a queer * operator (no, it doesn't represent anything related to pointers 😛). It basically packs multiple values into a single list/tuple <b>OR</b> unpacks elements of an iterable
+                depending on the use case. Don't worry, we will cover this in detail too! This is also used in function
+                declaration containing variable number of arguments. Let's take a deepdive into how the * operator works and maybe 
+                even combine it with value unpacking in python! 
+            </p>
+        </article>
+        <article>
+            <header>Using * operator for packing!</header>
+            <p>
+                This is the usage of the * operator in python! It can pack all the remaining elements
+                of the iterable into a single variable when used as the LHS and combined with unpacking!
+            </p>
+<pre><code class="lanaguage-python-repl">>>> first, *packed = 1, 2, 3, 4 
+>>> # the first element of the tuple on the right is stored in first
+>>> # all of the remaining elements are stored in packed!
+>>> # packed itself is a list
+>>> first
+1
+>>> packed
+[2, 3, 4]
+>>> first, *packed, last = [1, 2, 3, 4, 5]
+>>> first
+1
+>>> last
+5
+>>> packed
+[2, 3, 4]
+>>> for (first, *others) in [(1, 2, 3, 4), (1, 2, 3, 4)]:
+...    print(first, others)
+
+1 [2, 3, 4]
+1 [2, 3, 4]
+</code></pre>
+            <p>
+                It's an useful feature but it also needs python to construct a list from scratch which isn't
+                really the best for performance. It will also force python to eagerly evaluate the iterable which may
+                not be what you always want. A lot of times, if you just want to seperate an element from a lazily
+                evaluated iterable, <code>next</code> does the job!
+            </p>
+<pre><code class="lanaguage-python-repl">>>> inputs = map(int, input().split())
+1 2 3 4
+>>> first = next(inputs)
+>>> first
+1
+>>> list(inputs)
+[2, 3, 4]
+</code></pre>
+            <p>
+                This operator is often used in function declarations too. this will pack all the arguments passed into the function. The
+                difference here is that, it returns a <code>tuple</code> instead of a list!
+            </p>
+<pre><code class="lanaguage-python-repl">>>> def func(first, *other_args):
+...    print(first)
+...    print(other_args) # prints the tuple!
+... 
+>>> func(1, 2, 3, 4)
+1
+(2, 3, 4)
+</code></pre>
+            <p>Notice that the starred variable will just acculimate all the parameters even if there's other
+                arguments after that. Those arguments can only be assigned a value through keyword arguments.
+            </p>
+<pre><code class="lanaguage-python-repl">>>> def func(first, *other_args, last):
+...    print(first, other_args, last)
+... 
+>>> func(1, 2, 3, 4)
+Traceback (most recent call last):
+  File "&#60pyshell&#62", line 1, in &#60module&#62
+    func(1, 2, 3, 4)
+TypeError: func() missing 1 required keyword-only argument: 'last'
+>>> # this can be used to make arguments keyword only and enforce them
+>>> def only_keyword_func(*no, keyword):
+...    print(keyword)
+...
+>>> only_keyword_func(1)
+Traceback (most recent call last):
+  File "&#60pyshell&#62", line 1, in &#60module&#62
+    only_keyword_func(1)
+TypeError: only_keyword_func() missing 1 required keyword-only argument: 'keyword'
+>>> # however, this needs an extra variable which is a waste. 
+>>> # turns out, python lets you just use * to declare keyword-only arguments
+>>> def only_keyword_func(*, keyword):
+...    print(keyword)
+...
+>>> only_keyword_func(1)
+Traceback (most recent call last):
+  File "&#60pyshell&#62", line 1, in &#60module&#62
+    only_keyword_func(1)
+TypeError: only_keyword_func() takes 0 positional arguments but 1 was given
+>>> only_keyword_func(keyword = "hello")
+hello
+</code></pre>
+        </article>
+
+    <article>
+        <header>Unpacking iterables with *</header>
+        <p>
+            While calling an object, you can even unpack iterables to be passed as seperate
+            parameters in python! 
+        </p>
+<pre><code class="language-python-repl">>>> def func(a, b, c):
+...    print(f"a = {a}, b = {b}, c = {c}")
+...
+>>> x = [1, 2, 3] # x is a list containing 3 elements
+>>> # although I'm only demonstrating it for a list, it works for any iterable
+>>> func(*x)
+a = 1, b = 2, c = 3
+>>> # python just unpacked the iterable into seperate parameters!
+>>> # let's try it on a built in function like print
+>>> print(*x, sep = "\n")
+1
+2
+3
+>>> # this unpacked th iterable into seperate parameters
+>>> # we used print's sep parameter to seperate the arguments by a newline!
+</code></pre>
+</article>
+<article>
+    <header>Pattern matching</header>
+        <p> With this, we just explored the various usecases of python's * operator! There's one more feature of * which is
+            in the new pattern matching syntax in python 3.10 namely, the <a href="https://www.python.org/dev/peps/pep-0622/#id50">sequence pattern</a>.
+        </p>
+<pre><code class="language-python-repl">>>> iterable = [1, 2, 3, 4, 5] # this works on any iterable too!
+>>> match iterable:
+...    case [1, *anything_else, 5]: 
+...       print(anything_else) # matches any list starting with 1, ending with 5
+...    
+[2, 3, 4]
+</code></pre>
+        
+</article>
+    </main>
+    <nav class="container-fluid footer">
+        <ul><li><small>This is the blog of Arghya 👋</small></li></ul>
+        <ul style="text-align: right;"><li><small>A developer and student who loves computer and tech ❣️</small></li></ul>
+    </nav>
+</body>
+</html>
